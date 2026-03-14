@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Cloudinary Environment Variables Setup
+echo "Setting up Cloudinary environment variables..."
+
+# Create .env.local file
+cat > .env.local << EOF
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=https://ukzpuykdgmysgtotdblo.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVrenB1eWtkZ215c2d0b3RkYmxvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MjM5NTksImV4cCI6MjA4ODk5OTk1OX0.40DyOKgAgQqLX1zZL8Op-VGZx9PVYZzez7-S9QmY-dU
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVrenB1eWtkZ215c2d0b3RkYmxvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MzQyMzk1OSwiZXhwIjoyMDg4OTk5OTU5fQ.NEED_TO_GET_ACTUAL_SERVICE_ROLE_KEY_FROM_SUPABASE_DASHBOARD
+
+# Cloudinary Configuration
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=dvtdzotx2
+NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=ml_default
+CLOUDINARY_API_KEY=398377936677277
+CLOUDINARY_API_SECRET=DgG2A3Ue-KiZVtHm3-IV5fVxUrA
+
+# Environment
+NODE_ENV=development
+EOF
+
+echo "Environment variables set successfully!"
+echo "Please restart the development server to apply changes."

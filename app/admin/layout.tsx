@@ -12,7 +12,8 @@ import {
   LogOut,
   Menu,
   X,
-  ChevronRight
+  ChevronRight,
+  Edit3
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
@@ -24,6 +25,7 @@ const navigation = [
   { name: 'Gallery', href: '/admin/gallery', icon: Image },
   { name: 'Resident DJs', href: '/admin/djs', icon: Music },
   { name: 'Contacts', href: '/admin/contacts', icon: Mail },
+  { name: 'Store Editor', href: '/admin/store-editor', icon: Edit3 },
 ]
 
 export default function AdminLayout({

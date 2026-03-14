@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Save } from 'lucide-react'
+import { ImageUpload } from '@/components/ImageUpload'
 
 export default function NewEquipment() {
   const router = useRouter()
@@ -19,6 +20,9 @@ export default function NewEquipment() {
     category: 'sound',
     price: '',
     is_available: true,
+    image_url: '',
+    cloudinary_public_id: '',
+    additional_images: [],
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -136,6 +140,20 @@ export default function NewEquipment() {
                 required
               />
             </div>
+          </div>
+
+          <div className="mb-6">
+            <label className="block text-white mb-2 text-sm">Equipment Image</label>
+            <ImageUpload
+              onUpload={(url, publicId) => setFormData({ 
+                ...formData, 
+                image_url: url, 
+                cloudinary_public_id: publicId 
+              })}
+              currentImage={formData.image_url}
+              folder="equipment"
+              className="mb-4"
+            />
           </div>
 
           <div className="mb-6">

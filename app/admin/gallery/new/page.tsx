@@ -5,6 +5,8 @@ import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Save } from 'lucide-react'
+import { VisualEditor } from '@/components/VisualEditor'
+import { ImageUpload } from '@/components/ImageUpload'
 
 export default function NewGalleryItem() {
   const router = useRouter()
@@ -19,6 +21,8 @@ export default function NewGalleryItem() {
     media_type: 'image',
     media_url: '',
     thumbnail_url: '',
+    cloudinary_public_id: '',
+    additional_images: [],
     is_published: true,
   })
 
@@ -87,20 +91,20 @@ export default function NewGalleryItem() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
               <label className="block text-white mb-2 text-sm">Description (English)</label>
-              <textarea
-                value={formData.description_en}
-                onChange={(e) => setFormData({ ...formData, description_en: e.target.value })}
-                rows={3}
-                className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-purple-500"
+              <VisualEditor
+                content={formData.description_en}
+                onChange={(content) => setFormData({ ...formData, description_en: content })}
+                placeholder="Enter description in English..."
+                className="min-h-[150px]"
               />
             </div>
             <div>
               <label className="block text-white mb-2 text-sm">Description (German)</label>
-              <textarea
-                value={formData.description_de}
-                onChange={(e) => setFormData({ ...formData, description_de: e.target.value })}
-                rows={3}
-                className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-purple-500"
+              <VisualEditor
+                content={formData.description_de}
+                onChange={(content) => setFormData({ ...formData, description_de: content })}
+                placeholder="Enter description in German..."
+                className="min-h-[150px]"
               />
             </div>
           </div>
@@ -141,6 +145,20 @@ export default function NewGalleryItem() {
                 className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-purple-500"
               />
             </div>
+          </div>
+
+          <div className="mb-6">
+            <label className="block text-white mb-2 text-sm">Gallery Image</label>
+            <ImageUpload
+              onUpload={(url, publicId) => setFormData({ 
+                ...formData, 
+                media_url: url, 
+                cloudinary_public_id: publicId 
+              })}
+              currentImage={formData.media_url}
+              folder="gallery"
+              className="mb-4"
+            />
           </div>
 
           <div className="mb-6">

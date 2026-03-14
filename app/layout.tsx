@@ -17,6 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <script 
+          src="/store-editor.js" 
+          defer
+        />
+      </head>
       <body className="min-h-screen flex flex-col">
         <LayoutWrapper>
           {children}

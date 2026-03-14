@@ -5,6 +5,8 @@ import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Save } from 'lucide-react'
+import { VisualEditor } from '@/components/VisualEditor'
+import { ImageUpload } from '@/components/ImageUpload'
 
 export default function NewDJ() {
   const router = useRouter()
@@ -16,6 +18,7 @@ export default function NewDJ() {
     bio_en: '',
     bio_de: '',
     photo_url: '',
+    cloudinary_public_id: '',
     social_links: { instagram: '', soundcloud: '', spotify: '' },
     is_active: true,
   })
@@ -74,32 +77,35 @@ export default function NewDJ() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
               <label className="block text-white mb-2 text-sm">Bio (English)</label>
-              <textarea
-                value={formData.bio_en}
-                onChange={(e) => setFormData({ ...formData, bio_en: e.target.value })}
-                rows={4}
-                className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-purple-500"
+              <VisualEditor
+                content={formData.bio_en}
+                onChange={(content) => setFormData({ ...formData, bio_en: content })}
+                placeholder="Enter DJ bio in English..."
+                className="min-h-[150px]"
               />
             </div>
             <div>
               <label className="block text-white mb-2 text-sm">Bio (German)</label>
-              <textarea
-                value={formData.bio_de}
-                onChange={(e) => setFormData({ ...formData, bio_de: e.target.value })}
-                rows={4}
-                className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-purple-500"
+              <VisualEditor
+                content={formData.bio_de}
+                onChange={(content) => setFormData({ ...formData, bio_de: content })}
+                placeholder="Enter DJ bio in German..."
+                className="min-h-[150px]"
               />
             </div>
           </div>
 
           <div className="mb-6">
-            <label className="block text-white mb-2 text-sm">Photo URL</label>
-            <input
-              type="url"
-              value={formData.photo_url}
-              onChange={(e) => setFormData({ ...formData, photo_url: e.target.value })}
-              placeholder="https://..."
-              className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-purple-500"
+            <label className="block text-white mb-2 text-sm">DJ Photo</label>
+            <ImageUpload
+              onUpload={(url, publicId) => setFormData({ 
+                ...formData, 
+                photo_url: url, 
+                cloudinary_public_id: publicId 
+              })}
+              currentImage={formData.photo_url}
+              folder="resident-djs"
+              className="mb-4"
             />
           </div>
 

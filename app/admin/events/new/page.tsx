@@ -5,6 +5,8 @@ import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Save } from 'lucide-react'
+import { VisualEditor } from '@/components/VisualEditor'
+import { ImageUpload } from '@/components/ImageUpload'
 
 export default function NewEvent() {
   const router = useRouter()
@@ -23,6 +25,9 @@ export default function NewEvent() {
     lineup: '',
     eventbrite_url: '',
     is_published: false,
+    image_url: '',
+    cloudinary_public_id: '',
+    gallery_images: [],
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -117,21 +122,21 @@ export default function NewEvent() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
               <label className="block text-white mb-2 text-sm">Description (English)</label>
-              <textarea
-                value={formData.description_en}
-                onChange={(e) => setFormData({ ...formData, description_en: e.target.value })}
-                rows={4}
-                className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-purple-500"
+              <VisualEditor
+                content={formData.description_en}
+                onChange={(content) => setFormData({ ...formData, description_en: content })}
+                placeholder="Enter event description in English..."
+                className="min-h-[200px]"
               />
             </div>
 
             <div>
               <label className="block text-white mb-2 text-sm">Description (German)</label>
-              <textarea
-                value={formData.description_de}
-                onChange={(e) => setFormData({ ...formData, description_de: e.target.value })}
-                rows={4}
-                className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-purple-500"
+              <VisualEditor
+                content={formData.description_de}
+                onChange={(content) => setFormData({ ...formData, description_de: content })}
+                placeholder="Enter event description in German..."
+                className="min-h-[200px]"
               />
             </div>
           </div>
@@ -188,6 +193,20 @@ export default function NewEvent() {
               value={formData.eventbrite_url}
               onChange={(e) => setFormData({ ...formData, eventbrite_url: e.target.value })}
               className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white focus:outline-none focus:border-purple-500"
+            />
+          </div>
+
+          <div className="mb-6">
+            <label className="block text-white mb-2 text-sm">Event Image</label>
+            <ImageUpload
+              onUpload={(url, publicId) => setFormData({ 
+                ...formData, 
+                image_url: url, 
+                cloudinary_public_id: publicId 
+              })}
+              currentImage={formData.image_url}
+              folder="events"
+              className="mb-4"
             />
           </div>
 
