@@ -28,32 +28,41 @@ export default function StoreEditor() {
   const [editValue, setEditValue] = useState('');
   const [changes, setChanges] = useState<EditableSection[]>([]);
 
-  const pages = [
+  const pages: {
+    path: string;
+    name: string;
+    sections: {
+      id: string;
+      selector: string;
+      label: string;
+      type: 'text' | 'image';
+    }[];
+  }[] = [
     { path: '/', name: 'Homepage', sections: [
-      { id: 'hero-title', selector: 'main h1', label: 'Hero Title', type: 'text' as const },
-      { id: 'hero-subtitle', selector: 'main p', label: 'Hero Subtitle', type: 'text' as const },
-      { id: 'cta-text', selector: 'main a[href="/events"]', label: 'CTA Button', type: 'text' as const },
+      { id: 'hero-title', selector: 'main h1', label: 'Hero Title', type: 'text' },
+      { id: 'hero-subtitle', selector: 'main p', label: 'Hero Subtitle', type: 'text' },
+      { id: 'cta-text', selector: 'main a[href="/events"]', label: 'CTA Button', type: 'text' },
     ]},
     { path: '/events', name: 'Events', sections: [
-      { id: 'events-title', selector: 'h1', label: 'Page Title', type: 'text' as const },
+      { id: 'events-title', selector: 'h1', label: 'Page Title', type: 'text' },
     ]},
     { path: '/gallery', name: 'Gallery', sections: [
-      { id: 'gallery-title', selector: 'h1', label: 'Page Title', type: 'text' as const },
+      { id: 'gallery-title', selector: 'h1', label: 'Page Title', type: 'text' },
     ]},
     { path: '/services', name: 'Services', sections: [
-      { id: 'services-title', selector: 'h1', label: 'Page Title', type: 'text' as const },
+      { id: 'services-title', selector: 'h1', label: 'Page Title', type: 'text' },
     ]},
     { path: '/equipment', name: 'Equipment', sections: [
-      { id: 'equipment-title', selector: 'h1', label: 'Page Title', type: 'text' as const },
+      { id: 'equipment-title', selector: 'h1', label: 'Page Title', type: 'text' },
     ]},
     { path: '/about', name: 'About', sections: [
-      { id: 'about-title', selector: 'h1', label: 'Page Title', type: 'text' as const },
+      { id: 'about-title', selector: 'h1', label: 'Page Title', type: 'text' },
     ]},
     { path: '/djs', name: 'Resident DJs', sections: [
-      { id: 'djs-title', selector: 'h1', label: 'Page Title', type: 'text' as const },
+      { id: 'djs-title', selector: 'h1', label: 'Page Title', type: 'text' },
     ]},
     { path: '/contact', name: 'Contact', sections: [
-      { id: 'contact-title', selector: 'h1', label: 'Page Title', type: 'text' as const },
+      { id: 'contact-title', selector: 'h1', label: 'Page Title', type: 'text' },
     ]},
   ];
 

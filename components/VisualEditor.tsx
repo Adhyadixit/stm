@@ -49,7 +49,7 @@ export const VisualEditor: React.FC<VisualEditorProps> = ({
   }, [onChange]);
 
   const insertLink = useCallback(() => {
-    if (linkUrl && linkText) {
+    if (linkUrl && linkText && editorRef.current) {
       const link = `<a href="${linkUrl}" target="_blank" rel="noopener noreferrer" style="color: #8b5cf6; text-decoration: underline;">${linkText}</a>`;
       document.execCommand('insertHTML', false, link);
       onChange(editorRef.current.innerHTML);
