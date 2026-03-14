@@ -94,7 +94,7 @@ export default function Navigation() {
                 Admin Console
               </Link>
             ) : (
-              <Link href="/admin/login" className="text-sm uppercase tracking-wide hover:text-gray-300 transition-colors">
+              <Link href="/login" className="text-sm uppercase tracking-wide hover:text-gray-300 transition-colors">
                 Login
               </Link>
             )}
@@ -132,7 +132,7 @@ export default function Navigation() {
                 Admin Console
               </Link>
             ) : (
-              <Link href="/admin/login" className="block text-sm uppercase tracking-wide hover:text-gray-300 transition-colors py-2 border-t border-white/10 mt-2 pt-2">
+              <Link href="/login" className="block text-sm uppercase tracking-wide hover:text-gray-300 transition-colors py-2 border-t border-white/10 mt-2 pt-2">
                 Login
               </Link>
             )}

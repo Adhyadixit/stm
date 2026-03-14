@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('')
@@ -98,6 +99,15 @@ export default function AdminLogin() {
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
+
+        <div className="mt-6 text-center">
+          <Link
+            href="/login"
+            className="text-gray-400 hover:text-white transition-colors text-sm"
+          >
+            ← Back to User Login
+          </Link>
+        </div>
       </div>
     </div>
   )

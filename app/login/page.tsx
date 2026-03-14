@@ -48,7 +48,7 @@ export default function Login() {
           router.push('/user/dashboard')
         }
       } else {
-        // Sign in
+        // Sign in - Regular users only
         const { data, error: signInError } = await supabase.auth.signInWithPassword({
           email,
           password
@@ -56,20 +56,9 @@ export default function Login() {
 
         if (signInError) throw signInError
 
-        // Check if user is admin
+        // Always redirect to user dashboard for regular login
         if (data.user) {
-          const { data: adminData } = await supabase
-            .from('admin_users')
-            .select('id')
-            .eq('user_id', data.user.id)
-            .single()
-
-          if (adminData) {
-            localStorage.setItem('stm_admin_status', 'true')
-            router.push('/admin/dashboard')
-          } else {
-            router.push('/user/dashboard')
-          }
+          router.push('/user/dashboard')
         }
       }
     } catch (err: any) {
@@ -90,12 +79,12 @@ export default function Login() {
             <h1 className="text-2xl font-bold text-white">STM Events</h1>
           </div>
           <h2 className="text-xl font-semibold text-white mb-2">
-            {isSignUp ? 'Create Account' : 'Welcome Back'}
+            {isSignUp ? 'Create User Account' : 'User Login'}
           </h2>
           <p className="text-gray-400">
             {isSignUp 
               ? 'Join the STM Events community' 
-              : 'Sign in to access your account'
+              : 'Sign in to your user account'
             }
           </p>
         </div>
